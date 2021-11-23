@@ -16,8 +16,9 @@ pip_args="--cache-dir=$tmp_dir --build $tmp_dir"
 
 TMPDIR=$tmp_dir pip install "$pip_args" --upgrade pip
 TMPDIR=$tmp_dir pip install "$pip_args" -r "$repo_dir/requirements.txt"
-TMPDIR=$tmp_dir pip install "$pip_args" "$repo_dir/nasbench/"
-TMPDIR=$tmp_dir pip install "$pip_args" "$repo_dir/NASBench-PyTorch/"
-TMPDIR=$tmp_dir pip install "$pip_args" "$repo_dir/arch2vec/"
-TMPDIR=$tmp_dir pip install "$pip_args" "$repo_dir/info-nas/"
 
+if [[ $info_nas ]]; then
+  TMPDIR=$tmp_dir pip install "$pip_args" "$repo_dir/nasbench/"
+  TMPDIR=$tmp_dir pip install "$pip_args" "$repo_dir/NASBench-PyTorch/"
+  TMPDIR=$tmp_dir pip install "$pip_args" "$repo_dir/arch2vec/"
+  TMPDIR=$tmp_dir pip install "$pip_args" "$repo_dir/info-nas/"
