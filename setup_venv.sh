@@ -1,6 +1,6 @@
 #!/bin/bash
 
-test -n "$repo_dir" || { echo >&2 "Variable repo)dir is not set!"; exit 1; }
+test -n "$repo_dir" || { echo >&2 "Variable repo_dir is not set!"; exit 1; }
 test -n "$SCRATCHDIR" || { echo >&2 "Variable SCRATCHDIR is not set!"; exit 1; }
 module add python/3.8.0-gcc-rab6t
 module add cudnn/cudnn-7.6.5.32-10.2-linux-x64-gcc-6.3.0-xqx4s5f
