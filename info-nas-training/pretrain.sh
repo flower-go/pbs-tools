@@ -16,7 +16,7 @@ infonas="$DATADIR"/info-nas
 
 python "$infonas"/scripts/pretrain_i_th_hashes.py "$infonas"/$hashdir $hashno \
 	--nasbench_path "$infonas"/data/nasbench_only108.tfrecord \
-	--config_path "$infonas"/info_nas/configs/pretrain_config.json \
+	--config_path "$infonas"/configs/pretrain_config.json \
 	--root "$infonas"/data/cifar/ > "$SCRATCHDIR"/out.txt 2> "$SCRATCHDIR"/err.txt
 
 cp "$SCRATCHDIR"/out.txt "$infonas"/"$hashdir"/"$hashno"_out.txt
