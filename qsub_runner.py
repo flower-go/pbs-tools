@@ -6,7 +6,7 @@ import subprocess
 
 
 @click.command()
-@click.argument('script_path')
+@click.argument('script_path', default="info-nas-training/pretrain.sh")
 @click.option('--gpu/--no_gpu', default=False)
 @click.option('--select', default="1")
 @click.option('--ngpus', default="1")
