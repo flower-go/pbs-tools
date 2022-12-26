@@ -44,8 +44,8 @@ def main(script_path, gpu, select, ngpus, ncpus, mem, scratch_local, cluster, wa
     if print_command:
         print(" ".join(script_def))
 
-    ret_val = subprocess.call(script_def)
-    exit(ret_val)
+    #ret_val = subprocess.call(script_def)
+    #exit(ret_val)
 
 
 if __name__ == "__main__":
