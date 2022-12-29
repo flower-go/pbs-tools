@@ -19,7 +19,8 @@ pip_args="--cache-dir=$tmp_dir --build $tmp_dir"
 
 TMPDIR=$tmp_dir pip install "$pip_args" --upgrade pip
 TMPDIR=$tmp_dir pip install "$pip_args" -r "$repo_dir/requirements.txt"
-
+TMPDIR=$tmp_dir pip install -e 'overcooked_ai[harl]'
+TMPDIR=$tmp_dir pip install -e 'stable-baselines3'
 #if [[ $info_nas ]]; then
  # TMPDIR=$tmp_dir pip install "$pip_args" "$repo_dir/nasbench/"
   #TMPDIR=$tmp_dir pip install "$pip_args" "$repo_dir/NASBench-PyTorch/"
