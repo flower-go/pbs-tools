@@ -1,4 +1,5 @@
 #!/bin/bash
 
 cd $HOME/coding/pbs-tools
-qsub -e results -o results -l select=1:ncpus=4:mem=16gb:scratch_local=2gb:cluster=adan -l walltime=00:10:00 info-nas-training/pretrain.sh
+#qsub -e results -o results -l select=1:ncpus=4:mem=16gb:scratch_local=2gb:cluster=adan -l walltime=00:10:00 info-nas-training/pretrain.sh
+qsub -e results -o results -l select=1:ncpus=4:mem=16gb:scratch_local=2gb:cluster=adan -l walltime=00:10:00 /overcooked/run_tests.sh
