@@ -2,11 +2,11 @@ import click
 import subprocess
 
 #qsub -l select=1:ncpus=4:ngpus=1:mem=16gb:scratch_local=2gb:cluster=adan -q
-#gpu -l walltime=00:30:00 -v hashdir=data/hashes/train_hashes_100_splits/,hashno=same_4 pretrain.sh
+#gpu -l walltime=00:30:00 -v hashdir=data/hashes/train_hashes_100_splits/,hashno=same_4 pretrainPremkovo.sh
 
 
 @click.command()
-@click.argument('script_path', default="info-nas-training/pretrain.sh")
+@click.argument('script_path', default="info-nas-training/pretrainPremkovo.sh")
 @click.option('--gpu/--no_gpu', default=False)
 @click.option('--select', default="1")
 @click.option('--ngpus', default="1")
