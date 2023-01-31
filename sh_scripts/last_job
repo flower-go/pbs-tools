@@ -1,12 +1,18 @@
 #!/bin/bash
 
-file_names=$(ls $HOME/coding/results/ | tail -3 | head -2)
+#file_names=$(ls $HOME/coding/results/ | tail -3 | head -2)
+resultsdir=/storage/plzen1/home/ayshi/coding/results
+jobid=$(cat "$resultsdir"/jobs_info.txt | tail -1 | grep -Eo [0-9]{8} | head -1)
+echo "job id"
+echo $jobid
+file_names=$(find "$resultsdir" -maxdepth 1 -name "*$jobid*" -print)
+
 
 for f in $file_names; do
 	echo "*********************************************************************************************"
 	echo $f
 	echo "*********************************************************************************************"
-	cat $HOME/coding/results/"$f"
+	cat "$f"
 done
 
 

@@ -3,39 +3,70 @@
 datename=$(date +%m%d-%H%M)
 stars="************************************************************************"
 
-BASEDIR="/storage/plzen1/home/ayshi"
-DATADIR="$BASEDIR"/coding
-INFODIR="$DATADIR"/results
-CODEDIR="$DATADIR"/overcooked_ai
+export BASEDIR="/storage/plzen1/home/ayshi"
+export DATADIR="$BASEDIR"/coding
+export INFODIR="$DATADIR"/results
+export CODEDIR="$DATADIR"/overcooked_ai
 
 #TODO setup_env?
 
 echo "$datename $PBS_JOBID is running on node `hostname -f` in a scratch directory $SCRATCHDIR" >> $INFODIR/jobs_info.txt
 
+
+while getopts ":t:" opt; do
+  case $opt in
+    t)
+      echo "-a was triggered, Parameter: $OPTARG" >&2
+      testy=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+
+
 # Create environments
-bash $DATADIR/pbs-tools/setup_venv.sh || { echo 'Venv creation failed'; exit1 ; }
-. "$SCRATCHDIR"/pyt/bin/activate
+. $DATADIR/pbs-tools/setup_venv.sh || { echo 'Venv creation failed'; exit1 ; }
+# . "$SCRATCHDIR"/pyt/bin/activate
+conda activate "$BASEDIR"/envs/OA2_env
 
 # Run tests
-echo $stars
-echo "TESTING/OVERCOOKED_TEST"
-echo $stars
+if [[ 1 == *"$testy"* ]]; then
+    echo $stars
+    echo "TESTING/OVERCOOKED_TEST"
+    echo $stars
 
-python3 "$CODEDIR"/testing/overcooked_test.py > "$SCRATCHDIR"/out.txt 2> "$SCRATCHDIR"/err.txt
-
-echo $stars
-echo "HARL TESTS (./run_tests.sh)"
-echo $stars
-cd "$CODEDIR"/src/human_aware_rl
-sh ./run_tests.sh > "$SCRATCHDIR"/out.txt 2> "$SCRATCHDIR"/err.txt
+    python3 "$CODEDIR"/testing/overcooked_test.py > "$SCRATCHDIR"/out.txt 2> "$SCRATCHDIR"/err.txt
+fi
+#harl_testy
+if [[ 2 == *"$testy"* ]]; then
+    echo $stars
+    echo "HARL TESTS (./run_tests.sh)"
+    echo $stars
+    cd "$CODEDIR"/src/human_aware_rl
+    sh ./run_tests.sh >> "$SCRATCHDIR"/out.txt 2>> "$SCRATCHDIR"/err.txt
+fi
+#harl_testy
 
 # jeste ty treti testy!
-echo $stars
-echo "vsechny harl testy"
-echo $stars
-python3 -m unittest discover -s testing/ -p "*_test.py"
+if [[ 3 == *"$testy"* ]]; then
+    echo $stars
+    echo "VSECHNY HARL TESTY"
+    echo $stars
+    cd ../..
+    python3 -m unittest discover -s testing/ -p "*_test.py"
+fi
+cp "$SCRATCHDIR"/out.txt "$INFODIR"/"$datename"."$PBS_JOBID"_out.txt
+cp "$SCRATCHDIR"/err.txt "$INFODIR"/"$datename"."$PBS_JOBID"_err.txt
 
-
+rm -r "$SCRATCHDIR"/*
 
 
 

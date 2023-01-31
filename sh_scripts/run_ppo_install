@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 
 myhome=/storage/plzen1/home/ayshi
 cd "$myhome"/coding/pbs-tools
@@ -7,4 +7,4 @@ res_dir="$myhome"/coding/results
 date_name=$(date +%m%d-%H%M)
  
 #qsub -N $date_name -e "$res_dir"/"$PBS_JOBID"_"$date_name"_1job_e.txt -o "$res_dir"/"$date_name"_1job_o.txt -l select=1:ncpus=4:mem=16gb:scratch_local=2gb:cluster=adan -l walltime=02:00:00 info-nas-training/pretrain.sh
-qsub -N $date_name -e "$res_dir" -o "$res_dir" -l select=1:ncpus=4:mem=16gb:scratch_local=2gb:cluster=adan -l walltime=01:10:00 -v t=3 overcooked/run_tests.sh
+qsub -N $date_name -e "$res_dir" -o "$res_dir" -l select=1:ngpus=1:mem=16gb:scratch_local=2gb:cluster=adan -q gpu -l walltime=01:10:00 -v t=3 PPO/install_PPO.sh
