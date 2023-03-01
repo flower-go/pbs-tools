@@ -13,7 +13,7 @@ echo "before activate"
 . $DATADIR/pbs-tools/setup_venv.sh || { echo 'Venv creation failed'; exit1 ; }
 conda activate "$BASEDIR"/envs/PPO_env
 echo "conda activated"
-python3 "$CODEDIR"/diverse_pool_build.py > "$SCRATCHDIR"/out.txt 2> "$SCRATCHDIR"/err.txt
+python3 "$CODEDIR"/diverse_pool_build.py --mode="SP" --trained_models=5 --exp="exp_test_1modSP_eval_MP_I" > "$SCRATCHDIR"/out.txt 2> "$SCRATCHDIR"/err.txt
 
 echo "job ended"
 cp "$SCRATCHDIR"/out.txt "$INFODIR"/"$datename"."$PBS_JOBID"_out.txt

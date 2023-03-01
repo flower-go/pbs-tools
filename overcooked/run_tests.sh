@@ -6,7 +6,7 @@ stars="************************************************************************"
 export BASEDIR="/storage/plzen1/home/ayshi"
 export DATADIR="$BASEDIR"/coding
 export INFODIR="$DATADIR"/results
-export CODEDIR="$DATADIR"/overcooked_ai
+export CODEDIR="$DATADIR"/PPO/overcooked_pytorch_stable_baselines/overcooked_ai
 
 #TODO setup_env?
 
@@ -35,7 +35,7 @@ done
 # Create environments
 . $DATADIR/pbs-tools/setup_venv.sh || { echo 'Venv creation failed'; exit1 ; }
 # . "$SCRATCHDIR"/pyt/bin/activate
-conda activate "$BASEDIR"/envs/OA2_env
+conda activate "$BASEDIR"/envs/PPO_env
 
 # Run tests
 if [[ 1 == *"$testy"* ]]; then
