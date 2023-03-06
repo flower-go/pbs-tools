@@ -17,7 +17,7 @@ tmp_dir="$SCRATCHDIR/tmp/"
 mkdir "$tmp_dir"
 
 #python3 -m venv "$SCRATCHDIR"/pyt
-conda activate "$BASEDIR"/envs/PPO_env
+conda activate "$BASEDIR"/envs/overcooked_ai_terminal
 
 # cache dir outside of limited reserved disk space
 pip_args="--cache-dir=$tmp_dir"
