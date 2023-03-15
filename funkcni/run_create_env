@@ -1,0 +1,22 @@
+#!/bin/bash
+#TTOTO funguje
+#create env
+module add conda-modules-py37
+conda create -n overcooked_ai_terminal python=3.7
+conda activate overcooked_ai_terminal
+conda install -y pytorch torchvision torchaudio pytorch-cuda=11.6 -c pytorch -c nvidia # check current pytorch install instruction
+conda install -y -c conda-forge gym tqdm tensorboard
+conda install -y -c anaconda pandas scipy
+conda install -y -c "conda-forge/label/broken" matplotlib
+
+cd /storage/plzen1/home/ayshi/coding/
+mkdir premek2
+cd premek2
+git clone https://github.com/PremekBasta/PPO.git
+export CODEDIR=$(pwd)
+echo $CODEDIR
+export PROJDIR=/storage/plzen1/home/ayshi/coding/premek2/PPO/overcooked_pytorch_stable_baselines/overcooked_ai/src/overcooked_ai_py
+echo $PROJDIR
+cd PPO/overcooked_pytorch_stable_baselines/overcooked_ai/src/overcooked_ai_py
+
+python diverse_population/diverse_pool_build.py --layout_name=$layout_name --trained_models=$trained_models --mode=$mode --exp=$exp --eval_set_name=$eval_set_name --init_SP_agents=$init_SP_agents --kl_diff_loss_coef=$kl_diff_loss_coef --kl_diff_loss_clip=$kl_diff_loss_clip --kl_diff_bonus_reward_coef=$kl_diff_bonus_reward_coef --kl_diff_bonus_reward_clip=$kl_diff_bonus_reward_clip --seed=$seed --n_sample_partners=$n_sample_partners > "$SCRATCHDIR"/out.txt 2> "$SCRATCHDIR"/err.txt
